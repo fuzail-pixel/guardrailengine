@@ -75,7 +75,7 @@ Database writes only happen if all Redis guardrails pass.
 
 ### 1. Clone the repository
 ```bash
-git clone https://github.com/your-username/guardrailengine.git
+https://github.com/fuzail-pixel/guardrailengine.git
 cd guardrailengine
 ```
 
