@@ -75,7 +75,7 @@ Database writes only happen if all Redis guardrails pass.
 
 ### 1. Clone the repository
 ```bash
-https://github.com/fuzail-pixel/guardrailengine.git
+git clone https://github.com/fuzail-pixel/guardrailengine.git
 cd guardrailengine
 ```
 
@@ -103,22 +103,20 @@ Server starts at `http://localhost:8080`
 ```http
 POST /api/users
 Content-Type: application/json
+{ "username": "alice", "isPremium": true }
 
-{
-  "username": "alice",
-  "isPremium": true
-}
+GET /api/users
+GET /api/users/{id}
 ```
 
 ### Bots
 ```http
 POST /api/bots
 Content-Type: application/json
+{ "name": "BotAlpha", "personaDescription": "A helpful AI assistant" }
 
-{
-  "name": "BotAlpha",
-  "personaDescription": "A helpful AI assistant"
-}
+GET /api/bots
+GET /api/bots/{id}
 ```
 
 ### Posts
@@ -131,6 +129,9 @@ Content-Type: application/json
 
 # By a bot
 { "content": "Bot generated post", "botId": 1 }
+
+GET /api/posts
+GET /api/posts/{postId}
 ```
 
 ### Comments
@@ -143,13 +144,14 @@ Content-Type: application/json
 
 # Bot comment (+1 virality, subject to all guardrails)
 { "content": "Interesting!", "botId": 1, "depthLevel": 0 }
+
+GET /api/posts/{postId}/comments
 ```
 
 ### Likes
 ```http
 POST /api/posts/{postId}/like
 Content-Type: application/json
-
 { "userId": 1 }
 ```
 
