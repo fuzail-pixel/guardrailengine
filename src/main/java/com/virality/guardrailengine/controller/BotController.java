@@ -3,6 +3,9 @@ package com.virality.guardrailengine.controller;
 import com.virality.guardrailengine.entity.Bot;
 import com.virality.guardrailengine.repository.BotRepository;
 import lombok.RequiredArgsConstructor;
+
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,4 +28,8 @@ public class BotController {
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
+    @GetMapping
+public ResponseEntity<List<Bot>> getAllBots() {
+    return ResponseEntity.ok(botRepository.findAll());
+}
 }

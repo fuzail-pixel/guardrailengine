@@ -17,6 +17,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class PostService {
@@ -180,6 +182,22 @@ public class PostService {
                     + " - Bot " + botName + " replied to your post");
             redisService.setNotificationCooldown(userId);
         }
+    }
+    public List<Post> getAllPosts() {
+        return postRepository.findAll();
+    }
+
+    public Post getPost(Long postId) {
+        return postRepository.findById(postId)
+                .orElseThrow(() -> new ResourceNotFoundException(
+                        "Post not found with id: " + postId));
+    }
+
+    public List<Comment> getComments(Long postId) {
+        postRepository.findById(postId)
+                .orElseThrow(() -> new ResourceNotFoundException(
+                        "Post not found with id: " + postId));
+        return commentRepository.findByPostId(postId);
     }
     
 }

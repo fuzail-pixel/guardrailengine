@@ -3,6 +3,9 @@ package com.virality.guardrailengine.controller;
 import com.virality.guardrailengine.entity.User;
 import com.virality.guardrailengine.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,4 +28,8 @@ public class UserController {
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
+    @GetMapping
+public ResponseEntity<List<User>> getAllUsers() {
+    return ResponseEntity.ok(userRepository.findAll());
+}
 }

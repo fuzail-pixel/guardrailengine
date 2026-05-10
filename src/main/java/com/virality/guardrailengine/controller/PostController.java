@@ -8,6 +8,9 @@ import com.virality.guardrailengine.entity.Post;
 import com.virality.guardrailengine.service.PostService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+
+import java.util.List;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -43,6 +46,19 @@ public class PostController {
         Post post = postService.likePost(postId, request.getUserId());
         return ResponseEntity.ok(post);
     }
-    
+    @GetMapping
+public ResponseEntity<List<Post>> getAllPosts() {
+    return ResponseEntity.ok(postService.getAllPosts());
+}
+
+@GetMapping("/{postId}")
+public ResponseEntity<Post> getPost(@PathVariable Long postId) {
+    return ResponseEntity.ok(postService.getPost(postId));
+}
+
+@GetMapping("/{postId}/comments")
+public ResponseEntity<List<Comment>> getComments(@PathVariable Long postId) {
+    return ResponseEntity.ok(postService.getComments(postId));
+}
     
 }
